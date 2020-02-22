@@ -6,6 +6,9 @@
 
 body {
     background-color: #1b1b1b;
+    background-image: url('assets/images/bones.jpg');
+    background-position: center;
+    background-attachment: fixed;
     width: 100vw;
     height: 10vw;
     padding: 0;
