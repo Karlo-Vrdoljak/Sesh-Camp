@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api/menuitem';
 import { Config } from 'src/environments/config';
 import { SPINNER } from 'ngx-ui-loader';
+import { ErrorHandler } from './services/errorHandler';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,10 @@ export class AppComponent implements OnInit{
 
   constructor(
     public config:Config,
+    public errorHandler: ErrorHandler
   ) {
     // SPINNER.rectangleBouncePulseOutRapid
+    this.errorHandler = new ErrorHandler();
   }
   
   public get SPINNER() {

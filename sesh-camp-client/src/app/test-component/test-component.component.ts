@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { TestService } from '../services/test.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { ErrorHandler } from '../services/errorHandler';
+import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 
 @Component({
   selector: 'app-test-component',
@@ -9,19 +11,34 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class TestComponentComponent implements OnInit {
   message:any;
-
+  user: any;
   constructor(
     public testService: TestService,
-    private ngxLoader: NgxUiLoaderService
+    private ngxLoader: NgxUiLoaderService,
+    public errorHandler: ErrorHandler,
+    @Inject(LOCAL_STORAGE) public storage: WebStorageService
   ) { }
 
   ngOnInit() {
-    this.ngxLoader.start();
-    
     this.testService.testNestJSApi().subscribe(data => {
-      this.message = data;
-      this.ngxLoader.stop();
+      console.log(data);
+      
     });
+    this.testService.testNestJWT().subscribe((data:any[]) => {
+      this.user = data[0];
+      this.message = data[1];
+      
+    },err => {
+      this.errorHandler.handleError(err);
+      this.testService.getToken({ username: 'admin', password: 'admin' }).subscribe(data => {
+        let auth = {...data};
+        this.storage.set('auth',auth);
+        console.log(auth);
+                
+      });
+      
+    }
+    , () => { });
   }
 
 }

@@ -17,5 +17,11 @@ export class TestService {
   testNestJSApi() {
     return this.http.get(this.config.API_URL_TEST, {});
   }
+  testNestJWT() {
+    return this.http.get(this.config.API_URL_TEST + 'protected');
+  }
+  getToken(params) {
+    return this.http.post(this.config.API_URL_ROOT + 'auth/login/', params );
+  }
   
 }

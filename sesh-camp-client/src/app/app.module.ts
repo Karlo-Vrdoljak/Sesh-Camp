@@ -7,7 +7,7 @@ import { TestService } from './services/test.service';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccordionModule } from 'primeng/accordion';
 import { PanelModule } from 'primeng/panel';
 import { ButtonModule } from 'primeng/button';
@@ -16,8 +16,11 @@ import { FormsModule } from '@angular/forms';
 import { SidebarModule } from 'primeng/sidebar';
 import { MenubarModule } from 'primeng/menubar';
 import { Config } from 'src/environments/config';
-
-import { NgxUiLoaderModule, NgxUiLoaderService, NgxUiLoaderConfig, SPINNER, POSITION, PB_DIRECTION } from 'ngx-ui-loader';
+import {CarouselModule} from 'primeng/carousel';
+import { StorageServiceModule } from 'angular-webstorage-service'
+import { NgxUiLoaderModule, NgxUiLoaderService, NgxUiLoaderConfig, SPINNER, POSITION, PB_DIRECTION, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
+import { AppHttpInterceptor } from './services/httpInterceptor';
+import { ErrorHandler } from './services/errorHandler';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: '#b0b0b1',
@@ -32,10 +35,11 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponentComponent
+    TestComponentComponent,
   ],
   imports: [
     BrowserModule,
+    StorageServiceModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -46,7 +50,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     RadioButtonModule,
     SidebarModule,
     MenubarModule,
-    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
+    NgxUiLoaderHttpModule.forRoot({... ngxUiLoaderConfig, showForeground: true}),
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    CarouselModule
   ],
   providers: [
     TestService,
@@ -55,7 +61,10 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
       provide: LocationStrategy,
       useClass: HashLocationStrategy 
     },
-    Config
+    Config,
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
+    ErrorHandler
+
 
   ],
   bootstrap: [AppComponent]
