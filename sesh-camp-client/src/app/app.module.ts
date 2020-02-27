@@ -17,12 +17,13 @@ import { SidebarModule } from 'primeng/sidebar';
 import { MenubarModule } from 'primeng/menubar';
 import { Config } from 'src/environments/config';
 import {CarouselModule} from 'primeng/carousel';
-import { StorageServiceModule } from 'angular-webstorage-service'
 import { NgxUiLoaderModule, NgxUiLoaderService, NgxUiLoaderConfig, SPINNER, POSITION, PB_DIRECTION, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 import { AppHttpInterceptor } from './services/httpInterceptor';
 import { ErrorHandler } from './services/errorHandler';
- 
+import { CommonModule } from '@angular/common';  
 import { ToastrModule } from 'ngx-toastr';
+import { AngularWebStorageModule } from 'angular-web-storage';
+
 
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
@@ -43,7 +44,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   ],
   imports: [
     BrowserModule,
-    StorageServiceModule,
+    CommonModule,
+    AngularWebStorageModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -62,8 +64,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
       countDuplicates: true,
       progressBar:true,
       progressAnimation: "decreasing",
-      positionClass:"toast-bottom-left"
-    })
+      positionClass:"toast-bottom-left",
+      enableHtml:true
+    }),
   ],
   providers: [
     TestService,
@@ -74,7 +77,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     },
     Config,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
-    ErrorHandler
+    ErrorHandler,
 
 
   ],

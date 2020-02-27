@@ -4,17 +4,18 @@
  import { Observable } from 'rxjs';
  import { ActivatedRoute, Router } from '@angular/router';
  import { Config } from '../../environments/config';
+import { LocalStorageService } from 'angular-web-storage';
 
  @Injectable()
  export class AppHttpInterceptor implements HttpInterceptor {
-     config: Config;
-     constructor() {
-         this.config = new Config();
-     }
+     constructor(
+         public config: Config,
+         public storage: LocalStorageService
+         ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if(localStorage.getItem('auth')) {
-            let data =  JSON.parse(localStorage.getItem('auth')); 
+            let data =  this.storage.get('auth');
             req = req.clone({ setHeaders: { 'Authorization': 'Bearer ' + data.access_token } });
         }
         // req = req.clone({ params: req.params.set('appVersion', '0.9') });

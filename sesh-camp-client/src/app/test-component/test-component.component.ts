@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { TestService } from '../services/test.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ErrorHandler } from '../services/errorHandler';
-import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
+import { LocalStorageService, SessionStorageService, LocalStorage, SessionStorage } from 'angular-web-storage';
 
 @Component({
   selector: 'app-test-component',
@@ -16,7 +16,7 @@ export class TestComponentComponent implements OnInit {
     public testService: TestService,
     private ngxLoader: NgxUiLoaderService,
     public errorHandler: ErrorHandler,
-    @Inject(LOCAL_STORAGE) public storage: WebStorageService
+    public storage:LocalStorageService
   ) { }
 
   ngOnInit() {
@@ -24,10 +24,10 @@ export class TestComponentComponent implements OnInit {
       console.log(data);
       
     });
-    this.testService.getToken({ username: 'user', password: 'user' }).subscribe(data => {
+    this.testService.getToken({ username: 'admin', password: 'admin' }).subscribe(data => {
       let auth = {...data};
-      this.storage.set('auth',auth);
       console.log(auth);
+      this.storage.set('auth',auth);
       this.testService.testNestJWT().subscribe((data:any[]) => {
         this.user = data[0];
         console.log(this.user);
