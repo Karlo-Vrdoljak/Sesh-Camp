@@ -21,6 +21,9 @@ import { StorageServiceModule } from 'angular-webstorage-service'
 import { NgxUiLoaderModule, NgxUiLoaderService, NgxUiLoaderConfig, SPINNER, POSITION, PB_DIRECTION, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 import { AppHttpInterceptor } from './services/httpInterceptor';
 import { ErrorHandler } from './services/errorHandler';
+ 
+import { ToastrModule } from 'ngx-toastr';
+
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: '#b0b0b1',
@@ -32,6 +35,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   pbDirection: PB_DIRECTION.leftToRight, // progress bar direction
   pbThickness: 5, // progress bar thickness
 };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +56,14 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MenubarModule,
     NgxUiLoaderHttpModule.forRoot({... ngxUiLoaderConfig, showForeground: true}),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    CarouselModule
+    CarouselModule,
+    ToastrModule.forRoot({
+      preventDuplicates:true,
+      countDuplicates: true,
+      progressBar:true,
+      progressAnimation: "decreasing",
+      positionClass:"toast-bottom-left"
+    })
   ],
   providers: [
     TestService,

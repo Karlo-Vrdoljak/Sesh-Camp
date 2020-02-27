@@ -20,7 +20,6 @@ export class AppComponent implements OnInit{
     public errorHandler: ErrorHandler
   ) {
     // SPINNER.rectangleBouncePulseOutRapid
-    this.errorHandler = new ErrorHandler();
   }
   
   public get SPINNER() {

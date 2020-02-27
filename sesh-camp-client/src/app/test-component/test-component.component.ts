@@ -24,21 +24,22 @@ export class TestComponentComponent implements OnInit {
       console.log(data);
       
     });
-    this.testService.testNestJWT().subscribe((data:any[]) => {
-      this.user = data[0];
-      this.message = data[1];
-      
-    },err => {
-      this.errorHandler.handleError(err);
-      this.testService.getToken({ username: 'admin', password: 'admin' }).subscribe(data => {
-        let auth = {...data};
-        this.storage.set('auth',auth);
-        console.log(auth);
-                
-      });
-      
-    }
-    , () => { });
+    this.testService.getToken({ username: 'user', password: 'user' }).subscribe(data => {
+      let auth = {...data};
+      this.storage.set('auth',auth);
+      console.log(auth);
+      this.testService.testNestJWT().subscribe((data:any[]) => {
+        this.user = data[0];
+        console.log(this.user);
+        
+        this.message = data[1];
+        
+      },err => {
+        this.errorHandler.handleError(err);
+      }
+      , () => { });
+    });
+    
   }
 
 }

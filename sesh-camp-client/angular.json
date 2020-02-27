@@ -27,7 +27,8 @@
               "src/styles.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/luna-blue/theme.css"
+              "node_modules/primeng/resources/themes/luna-blue/theme.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -93,9 +94,10 @@
             ],
             "styles": [
               "src/styles.css",
-              "../node_modules/primeng/resources/primeng.min.css",
-              "../node_modules/primeicons/primeicons.css",
-              "../node_modules/primeng/resources/themes/luna-blue/theme.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/luna-blue/theme.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
