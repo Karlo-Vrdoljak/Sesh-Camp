@@ -38,7 +38,8 @@ export class TestComponentComponent implements OnInit {
         this.errorHandler.handleError(err);
       }
       , () => { });
-    });
+    }, err => this.errorHandler.handleError(err)
+    , () => { });
     
   }
 
