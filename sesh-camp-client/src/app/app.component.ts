@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api/menuitem';
 import { Config } from 'src/environments/config';
-import { SPINNER } from 'ngx-ui-loader';
+import { SPINNER, POSITION } from 'ngx-ui-loader';
 import { ErrorHandler } from './services/errorHandler';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -17,13 +18,17 @@ export class AppComponent implements OnInit{
 
   constructor(
     public config:Config,
-    public errorHandler: ErrorHandler
+    public errorHandler: ErrorHandler,
   ) {
     // SPINNER.rectangleBouncePulseOutRapid
   }
   
   public get SPINNER() {
     return SPINNER;
+  }
+
+  public get POSITION() {
+    return POSITION;
   }
   
   ngOnInit(): void {

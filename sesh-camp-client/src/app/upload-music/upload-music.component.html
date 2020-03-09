@@ -1,0 +1,20 @@
+<p-panel header="memis" class="padding">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-4">
+        </div>
+        <div class="ui-g-4">
+            <p-fileUpload #fp mode="basic" chooseLabel="sesh" accept="audio/*" customUpload="true" (uploadHandler)="onUpload($event)"></p-fileUpload>
+        </div>
+        <div class="ui-g-4">
+        </div>
+    </div>
+</p-panel>
+
+<div class="ui-g-nopad ui-fluid">
+
+    <div class="ui-g-12-nopad">
+        <p-panel header="songs" *ngIf="music" class="padding">
+            <mat-advanced-audio-player #audioComponent [playlist]="playlist" [displayTitle]="true" [autoPlay]="false" muted="muted" [displayPlaylist]="true" [pageSizeOptions]="sizeOpts" [displayVolumeControls]="true" [expanded]="false"></mat-advanced-audio-player>
+        </p-panel>
+    </div>
+</div>

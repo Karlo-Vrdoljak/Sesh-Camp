@@ -3,4 +3,5 @@
 </p-sidebar>
 <p-menubar *ngIf="config.isLoggedIn" [model]="items" [style]="{'border':0, 'border-bottom-left-radius': '0.5em', 'border-bottom-right-radius': '0.5em'}"></p-menubar>
 <router-outlet></router-outlet>
-<ngx-ui-loader [fgsType]="SPINNER.rectangleBouncePulseOutRapid"></ngx-ui-loader>
+<ngx-ui-loader></ngx-ui-loader>
+<ngx-ui-loader [bgsPosition]="POSITION.bottomRight" [loaderId]="'music'"></ngx-ui-loader>

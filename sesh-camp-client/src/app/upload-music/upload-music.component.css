@@ -1,0 +1,6 @@
+:host >>> .ui-panel {
+    padding: 1em;
+}
+:host >>> th.mat-cell {
+    cursor: pointer;
+}

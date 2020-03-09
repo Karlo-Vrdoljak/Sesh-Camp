@@ -23,16 +23,19 @@ import { ErrorHandler } from './services/errorHandler';
 import { CommonModule } from '@angular/common';  
 import { ToastrModule } from 'ngx-toastr';
 import { AngularWebStorageModule } from 'angular-web-storage';
-
+import { UploadMusicComponent } from './upload-music/upload-music.component';
+import {FileUploadModule} from 'primeng/fileupload';
+import { MusicService } from './services/musicService';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
-  bgsColor: '#b0b0b1',
+  bgsColor: '#1f7ed0',
   fgsColor: '#b0b0b1',
   bgsPosition: POSITION.bottomCenter,
   bgsSize: 40,
-  bgsType: SPINNER.rectangleBounce, // background spinner type
-  fgsType: SPINNER.chasingDots, // foreground spinner type
+  bgsType: SPINNER.rectangleBounceParty, // background spinner type
+  fgsType: SPINNER.rectangleBouncePulseOutRapid, // foreground spinner type
   pbDirection: PB_DIRECTION.leftToRight, // progress bar direction
   pbThickness: 5, // progress bar thickness
 };
@@ -41,8 +44,10 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   declarations: [
     AppComponent,
     TestComponentComponent,
+    UploadMusicComponent,
   ],
   imports: [
+    NgxAudioPlayerModule,
     BrowserModule,
     CommonModule,
     AngularWebStorageModule,
@@ -67,6 +72,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
       positionClass:"toast-bottom-left",
       enableHtml:true
     }),
+    FileUploadModule
   ],
   providers: [
     TestService,
@@ -78,7 +84,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     Config,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
     ErrorHandler,
-
+    MusicService,
 
   ],
   bootstrap: [AppComponent]

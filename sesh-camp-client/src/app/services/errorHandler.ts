@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { HTTPErrorCodes } from "../types/http.error.codes";
+import { HTTPErrorCodes } from "../types/http.config";
 import { ToastrService } from "ngx-toastr";
 @Injectable({
   providedIn: "root"
